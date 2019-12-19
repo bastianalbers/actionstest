@@ -6,8 +6,9 @@ on:
 
 jobs:
   build:
-    name: Hello
-    runs-on: ubuntu-latest
-    steps:
-    - name: Hello World
-      run: echo 'Hello World'
+    if: startsWith(toJSON(github.event.pull_request.labels),'test:')
+      name: Hello
+      runs-on: ubuntu-latest
+      steps:
+      - name: Hello World
+        run: echo toJSON(github.event.pull_request.labels).split('test:')[1]
